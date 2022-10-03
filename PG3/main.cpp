@@ -22,12 +22,12 @@ float main()
 	if (recursiveTotalSalary >= generalTotalSalary)
 	{
 		cout << time << "時間だと、再帰的賃金体系の方が儲かる" << endl;
-		cout << "合計給料" << recursiveTotalSalary << "\n" << endl;
+		cout << "合計給料：" << recursiveTotalSalary << "\n" << endl;
 	}
 	else
 	{
 		cout << time << "時間だと、一般的賃金体系の方が儲かる" << endl;
-		cout << "合計給料" << generalTotalSalary << "\n" << endl;
+		cout << "合計給料：" << generalTotalSalary << "\n" << endl;
 	}
 
 	return 0;
