@@ -4,15 +4,14 @@ using namespace std;
 template<typename T>
 T Min(T a, T b)
 {
-	if (typeid(T) == typeid(char))
-	{
-		cout << "”Žš‚Í‘ã“ü‚Å‚«‚Ü‚¹‚ñ" << endl;
-		return -1;
-	}
-	else
-	{
-		return static_cast<T>(a <= b ? a : b);
-	}
+	return static_cast<T>(a <= b ? a : b);
+}
+
+template<>
+char Min(char a, char b)
+{
+	cout << "”ŽšˆÈŠO‚Í‘ã“ü‚Å‚«‚Ü‚¹‚ñ" << endl;
+	return -1;
 }
 
 int main()
@@ -22,9 +21,9 @@ int main()
 	double ad = 2.553, bd = 3.7678;
 	char ac = 'ac', bc = 'bc';
 
-	Min<int>(ai, bi);
-	Min<float>(af, bf);
-	Min<double>(ad, bd);
+	cout << Min<int>(ai, bi) << endl;
+	cout << Min<float>(af, bf) << endl;
+	cout << Min<double>(ad, bd) << endl;
 	Min<char>(ac, bc);
 
 	return 0;
