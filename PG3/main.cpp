@@ -11,14 +11,7 @@ T Min(T a, T b)
 	}
 	else
 	{
-		if (a == b)
-		{
-			return -1;
-		}
-		else
-		{
-			return static_cast<T>(a < b ? a : b);
-		}
+		return static_cast<T>(a <= b ? a : b);
 	}
 }
 
