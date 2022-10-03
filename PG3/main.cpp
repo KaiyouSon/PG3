@@ -7,7 +7,7 @@ T Min(T a, T b)
 	if (typeid(T) == typeid(char))
 	{
 		cout << "”Žš‚Í‘ã“ü‚Å‚«‚Ü‚¹‚ñ" << endl;
-		return 0;
+		return -1;
 	}
 	else
 	{
