@@ -34,15 +34,17 @@ int main()
 		}
 	};
 
-	// 偶数であれば
-	if (fx(num) == 0)
+	// サイコロの出目
+	int randNum = GetRange(0, 6);
+	cout << "抽選結果 :" << randNum << endl;
+
+	if (fx(num) == fx(randNum))
 	{
-		cout << GetRange(-20, 20) << endl;
+		cout << "当たり！" << endl;
 	}
-	// 奇数であれば
-	else if (fx(num) == 1)
+	else
 	{
-		cout << GetRange(-10, 10) << endl;
+		cout << "はずれ！" << endl;
 	}
 
 	return 0;
