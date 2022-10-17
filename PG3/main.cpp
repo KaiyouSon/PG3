@@ -19,7 +19,7 @@ int main()
 	cin >> num;
 
 	// 三秒スリープする
-	//Sleep(3000);
+	Sleep(3000);
 
 	// 関数ポインタ
 	PFunc pFunc = DecideOddOrEven;
