@@ -19,22 +19,23 @@ int main()
 	cin >> num;
 
 	// 三秒スリープする
-	Sleep(3000);
+	//Sleep(3000);
 
 	// 関数ポインタ
 	PFunc pFunc = DecideOddOrEven;
 
-	// 偶数であれば
-	if (pFunc(num) == 0)
-	{
-		cout << GetRange(-20, 20) << endl;
-	}
-	// 奇数であれば
-	else if (pFunc(num) == 1)
-	{
-		cout << GetRange(-10, 10) << endl;
-	}
+	// サイコロの出目
+	int randNum = GetRange(0, 6);
+	cout << "抽選結果 :" << randNum << endl;
 
+	if (pFunc(num) == pFunc(randNum))
+	{
+		cout << "当たり！" << endl;
+	}
+	else
+	{
+		cout << "はずれ！" << endl;
+	}
 
 	return 0;
 }
