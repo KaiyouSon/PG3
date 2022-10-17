@@ -11,6 +11,9 @@ int DecideOddOrEven(const int& num);
 // 乱数を取得する関数
 int GetRange(const int& min, const int& max);
 
+// 抽選する関数
+void Lottery(PFunc pFunc, int num);
+
 int main()
 {
 	srand(time(nullptr));
@@ -18,12 +21,19 @@ int main()
 	int num = 0;
 	cin >> num;
 
-	// 三秒スリープする
-	Sleep(3000);
-
 	// 関数ポインタ
 	PFunc pFunc = DecideOddOrEven;
 
+	Lottery(pFunc, num);
+
+	return 0;
+}
+
+// 抽選する関数
+void Lottery(PFunc pFunc, int num)
+{
+	// 三秒スリープする
+	Sleep(3000);
 	// サイコロの出目
 	int randNum = GetRange(0, 6);
 	cout << "抽選結果 :" << randNum << endl;
@@ -36,8 +46,6 @@ int main()
 	{
 		cout << "はずれ！" << endl;
 	}
-
-	return 0;
 }
 
 // 奇数か偶数を判断する関数
