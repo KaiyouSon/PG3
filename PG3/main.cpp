@@ -1,39 +1,25 @@
 #include <iostream>
-#include "SingleList.h"
-
-// 図書カード構造体
-struct LibraryCard
-{
-	char name[256];
-	int loanDate;
-	int returnDate;
-};
+#include "BidirectionalList.h"
 
 int main()
 {
-	SingleList<LibraryCard> libraryCardList;
+	BidireList<int> list;
 
-	// 一個目のカード
-	LibraryCard card{};
-	std::cout << "名前" << std::endl;
-	std::cin >> card.name;
+	list.PushBack(0);
+	list.PushBack(1);
+	list.PushBack(2);
+	list.PushBack(3);
+	list.PushBack(4);
 
-	std::cout << "貸出日" << std::endl;
-	std::cin >> card.loanDate;
-
-	std::cout << "返却日" << std::endl;
-	std::cin >> card.returnDate;
-	libraryCardList.PushBack(card);
+	list.PushFront(-1);
+	list.PushFront(-2);
 
 	std::cout << "------------------------" << std::endl;
 
 	// リストのサイズ分のデータを出力する
-	for (int i = 0; i < libraryCardList.GetSize(); i++)
+	for (int i = 0; i < list.GetSize(); i++)
 	{
-		std::cout << "名前  ：" << libraryCardList.GetNode(i).name << std::endl;
-		std::cout << "貸出日：" << libraryCardList.GetNode(i).loanDate << std::endl;
-		std::cout << "返却日：" << libraryCardList.GetNode(i).returnDate << std::endl;
-		std::cout << "------------------------" << std::endl;
+		std::cout << list.GetNode(i) << std::endl;
 	}
 
 	return 0;
