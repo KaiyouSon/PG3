@@ -7,10 +7,10 @@ struct Node
 	Node<T>* prev;
 	Node<T>* next;
 
-	Node() :next(nullptr)
+	Node() : prev(nullptr), next(nullptr)
 	{
 	}
-	Node(T data) : data(data), next(nullptr)
+	Node(T data) : data(data), prev(nullptr), next(nullptr)
 	{
 	}
 
@@ -35,12 +35,12 @@ template<typename T>
 class BidirectionalList
 {
 private:
-	Node<T> begin;
-	Node<T> tempNode;
+public:
+	Node<T>* begin;
 	uint32_t size;
 
 private:
-	// 単方向リストの最後のどうかをチェックする関数
+	// リストの最後かどうかをチェックする関数
 	inline Node<T>* CheckBack(Node<T>* p)
 	{
 		if (p->next == nullptr)
@@ -54,11 +54,11 @@ private:
 	}
 
 public:
-	BidirectionalList() :size(0)
+	BidirectionalList() : begin(nullptr), size(0)
 	{
 
 	};
-	BidirectionalList(const T& data) :size(0)
+	BidirectionalList(const T& data) : size(0)
 	{
 		begin.data = data;
 		size++;
@@ -67,9 +67,19 @@ public:
 	// 先頭にノードを追加
 	inline void PushFront(Node<T> p)
 	{
-		tempNode = begin;
-		begin = p;
-		begin.next = &tempNode;
+		if (size == 0)
+		{
+			begin = &p;
+		}
+		else
+		{
+
+			Node<T>* temp = begin;
+			temp->prev = &p;
+			p.next = temp;
+			begin = &p;
+		}
+
 		size++;
 	}
 
@@ -78,12 +88,31 @@ public:
 	{
 		if (size == 0)
 		{
-			begin = p;
+			begin = &p;
 		}
 		else
 		{
-			CheckBack(&begin)->next = &p;
+			p.prev = CheckBack(begin);
+			CheckBack(begin)->next = &p;
 		}
+
+		size++;
+	}
+
+	// ノードの挿入
+	inline void Insert(Node<T> p, const int& index)
+	{
+		Node<T>* current = begin;			// 現在のノード
+		Node<T>* nextNode = begin->next;	// 次のノード
+		for (int i = 0; i < index - 1; i++)
+		{
+			current = nextNode;
+			nextNode = current->next;
+		}
+
+		p.prev = current;
+		p.next = nextNode;
+		current->next = &p;
 
 		size++;
 	}
@@ -97,28 +126,47 @@ public:
 	// 最後のデータ
 	inline T GetBack()
 	{
-		return CheckBack(&begin)->data;
+		return CheckBack(begin)->data;
 	}
 
 	// 中間のデータ
 	inline T GetNode(const uint32_t& index)
 	{
 		auto current = begin;		// 現在のノード
-		auto nextNode = begin.next;	// 次のノード
+		auto nextNode = begin->next;	// 次のノード
 		for (int i = 0; i < index; i++)
 		{
-			current = *nextNode;
-			nextNode = current.next;
+			current = nextNode;
+			nextNode = current->next;
 		}
 
-		return current.data;
+		return current->data;
 	}
+
+	// 先頭要素削除
+	inline void PopFront()
+	{
+		Node<T>* newBeginNode = begin->next;
+		newBeginNode->prev = nullptr;
+		begin = nullptr;
+		begin = newBeginNode;
+		size--;
+	}
+
+	// 末尾要素削除
+	inline void PopBack()
+	{
+		Node<T>* endNode = CheckBack(begin);
+		endNode->next = nullptr;
+		size--;
+		//PushBack(*endPrevNode);
+	}
+
+	// クリア
+	inline void Clear() { begin = nullptr; }
 
 	// サイズの取得
 	inline uint32_t GetSize() { return size; }
-
-	// クリア
-	inline void Clear() { begin.data = 0; begin.next = nullptr; }
 };
 
 template<typename T>
