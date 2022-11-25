@@ -32,10 +32,9 @@ struct Node
 };
 
 template<typename T>
-class BidirectionalList
+class BidireList
 {
 private:
-public:
 	Node<T>* begin;
 	uint32_t size;
 
@@ -54,11 +53,11 @@ private:
 	}
 
 public:
-	BidirectionalList() : begin(nullptr), size(0)
+	BidireList() : begin(nullptr), size(0)
 	{
 
 	};
-	BidirectionalList(const T& data) : size(0)
+	BidireList(const T& data) : size(0)
 	{
 		begin.data = data;
 		size++;
@@ -198,6 +197,3 @@ public:
 	// ƒTƒCƒY‚ÌŽæ“¾
 	inline uint32_t GetSize() { return size; }
 };
-
-template<typename T>
-using BidireList = BidirectionalList<T>;

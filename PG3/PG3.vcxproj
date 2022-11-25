@@ -142,7 +142,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BidirectionalList.h" />
+    <ClInclude Include="BidireList.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="SingleList.h" />
   </ItemGroup>
