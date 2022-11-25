@@ -130,7 +130,7 @@ public:
 	}
 
 	// 中間のデータ
-	inline T GetNode(const uint32_t& index)
+	inline T GetData(const uint32_t& index)
 	{
 		auto current = begin;		// 現在のノード
 		auto nextNode = begin->next;	// 次のノード
@@ -141,6 +141,20 @@ public:
 		}
 
 		return current->data;
+	}
+
+	// ノードをもらう
+	inline Node<T> GetNode(const uint32_t& index)
+	{
+		auto current = begin;		// 現在のノード
+		auto nextNode = begin->next;	// 次のノード
+		for (int i = 0; i < index; i++)
+		{
+			current = nextNode;
+			nextNode = current->next;
+		}
+
+		return *current;
 	}
 
 	// 先頭要素削除
@@ -161,6 +175,22 @@ public:
 		size--;
 		//PushBack(*endPrevNode);
 	}
+
+	// 要素の削除
+	inline void Erase(const uint32_t& index)
+	{
+		auto current = begin;		// 現在のノード
+		auto nextNode = begin->next;	// 次のノード
+		for (int i = 0; i < index - 2; i++)
+		{
+			current = nextNode;
+			nextNode = current->next;
+		}
+
+		current->next = nextNode->next;
+		size--;
+	}
+
 
 	// クリア
 	inline void Clear() { begin = nullptr; }
