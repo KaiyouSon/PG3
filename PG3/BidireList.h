@@ -36,7 +36,7 @@ class BidireList
 {
 private:
 	Node<T>* begin;
-	uint32_t size;
+	unsigned int size;
 
 private:
 	// リストの最後かどうかをチェックする関数
@@ -116,6 +116,20 @@ public:
 		size++;
 	}
 
+	// 要素の変更
+	inline void Change(T p, const int& index)
+	{
+		Node<T>* current = begin;			// 現在のノード
+		Node<T>* nextNode = begin->next;	// 次のノード
+		for (int i = 0; i < index - 1; i++)
+		{
+			current = nextNode;
+			nextNode = current->next;
+		}
+
+		current->data = p;
+	}
+
 	// 最初のデータ
 	inline T GetFront()
 	{
@@ -129,7 +143,7 @@ public:
 	}
 
 	// 中間のデータ
-	inline T GetData(const uint32_t& index)
+	inline T GetData(const unsigned int& index)
 	{
 		auto current = begin;		// 現在のノード
 		auto nextNode = begin->next;	// 次のノード
@@ -143,7 +157,7 @@ public:
 	}
 
 	// ノードをもらう
-	inline Node<T> GetNode(const uint32_t& index)
+	inline Node<T> GetNode(const unsigned int& index)
 	{
 		auto current = begin;		// 現在のノード
 		auto nextNode = begin->next;	// 次のノード
@@ -176,7 +190,7 @@ public:
 	}
 
 	// 要素の削除
-	inline void Erase(const uint32_t& index)
+	inline void Erase(const unsigned int& index)
 	{
 		auto current = begin;		// 現在のノード
 		auto nextNode = begin->next;	// 次のノード
@@ -195,5 +209,5 @@ public:
 	inline void Clear() { begin = nullptr; }
 
 	// サイズの取得
-	inline uint32_t GetSize() { return size; }
+	inline unsigned int GetSize() { return size; }
 };

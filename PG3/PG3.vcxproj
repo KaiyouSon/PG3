@@ -139,10 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ListOperator.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BidireList.h" />
+    <ClInclude Include="ListOperator.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="SingleList.h" />
   </ItemGroup>
