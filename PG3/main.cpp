@@ -5,23 +5,35 @@
 
 int main()
 {
-	/*BidireList<int> list;
+	//int index;
 
-	list.PushBack(1);
-	list.PushBack(2);
-	list.PushBack(3);
-	list.PushBack(4);
+	//while (1)
+	//{
+	//	//std::cout << "整数値を入力してください。" << std::endl;
+	//	//std::cin >> index;
 
-	for (int i = 0; i < list.GetSize(); i++)
-	{
-		std::cout << list.GetData(i) << std::endl;
-	}
+	//	//if (std::cin.fail())
+	//	//{
+	//	//	std::cout << "入力エラー！\n" << std::endl;
+	//	//	std::cin.clear();
+	//	//	std::cin.ignore(1024, '\n');
+	//	//}
 
-	list.Change(5, 3);
-	for (int i = 0; i < list.GetSize(); i++)
-	{
-		std::cout << list.GetData(i) << std::endl;
-	}*/
+	//	std::cout << "[要素の編集]" << std::endl;
+	//	std::cout << "編集したい要素の番号を指定してください。" << std::endl;
+
+	//	int index = 0;
+	//	std::cin >> index;
+	//	if (std::cin.fail())
+	//	{
+	//		std::cout << "入力エラー！\n" << std::endl;
+	//		std::cin.clear();
+	//		std::cin.ignore(1024, '\n');
+	//	}
+	//}
+
+	//std::cin.ignore(1024, '\n');
+
 
 	std::unique_ptr<ListOperator> listOperator =
 		std::move(std::make_unique<ListOperator>());

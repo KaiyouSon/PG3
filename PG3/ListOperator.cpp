@@ -22,6 +22,12 @@ void ListOperator::Update()
 		std::cout << "4.要素の削除" << std::endl;
 
 		std::cin >> manipulatElementsStep;
+		if (std::cin.fail())
+		{
+			std::cout << "入力エラー\n" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(1024, '\n');
+		}
 		//std::cout << std::endl;
 		break;
 
@@ -37,6 +43,14 @@ void ListOperator::Update()
 		ElementsEdit();
 		break;
 
+	case Delete:
+		ElementsDelete();
+		break;
+
+	default:
+		std::cout << "入力エラー\n" << std::endl;
+		manipulatElementsStep = Default;
+		break;
 	}
 }
 
@@ -59,6 +73,13 @@ void ListOperator::ElementsDisplay()
 		std::cout << "2.順番を指定して要素の表示" << std::endl;
 
 		std::cin >> elementsDisplayStep;
+		if (std::cin.fail())
+		{
+			std::cout << "入力エラー\n" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(1024, '\n');
+		}
+
 		std::cout << std::endl;
 		break;
 
@@ -69,7 +90,10 @@ void ListOperator::ElementsDisplay()
 	case OrderDesignationDisplay:	// 順番指定表示
 		ElementsOrderDesignationDisplay();
 		break;
+
 	default:
+		std::cout << "入力エラー\n" << std::endl;
+		elementsDisplayStep = Default;
 		break;
 	}
 }
@@ -99,6 +123,13 @@ void ListOperator::ElementsOrderDesignationDisplay()
 
 	int index = 0;
 	std::cin >> index;
+	if (std::cin.fail())
+	{
+		std::cout << "入力エラー\n" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(1024, '\n');
+	}
+
 	if (index > list.GetSize())
 	{
 		std::cout << "指定した順番に要素がありませんでした。" << std::endl;
@@ -128,6 +159,12 @@ void ListOperator::ElementsDisplayBack()
 
 	std::cin >> optionNum;
 	std::cout << std::endl;
+	if (std::cin.fail())
+	{
+		std::cout << "入力エラー\n" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(1024, '\n');
+	}
 
 	switch (optionNum)
 	{
@@ -139,6 +176,8 @@ void ListOperator::ElementsDisplayBack()
 		manipulatElementsStep = Default;
 		break;
 	default:
+		optionNum = BackToDisplay;
+		std::cout << "入力エラー\n" << std::endl;
 		break;
 	}
 }
@@ -149,27 +188,31 @@ void ListOperator::ElementsInsert()
 	std::cout << "[リストの要素の挿入]" << std::endl;
 	std::cout << "要素を追加する場所を指定してくだいさい。最後尾に追加する場合は何も入力しないでください" << std::endl;
 
-	int index = 0;
-	std::cin >> index;
+	std::string str;
+	std::cin.ignore(1024, '\n');
+	std::getline(std::cin, str);
+
+	int index = atoi(str.c_str());
+
+	if (std::cin.fail())
+	{
+		std::cout << "入力エラー\n" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(1024, '\n');
+	}
 
 	std::cout << "追加する要素の値を入力してください" << std::endl;
 
-	int data = 0;
+	std::string data;
 	std::cin >> data;
 
+	list.Insert(data, index);
 	if (index > list.GetSize())
 	{
-		list.PushBack(data);
-		std::cout << "要素" << data << "が最後尾に追加されました" << std::endl;
+		std::cout << "要素" << data << "が" << list.GetSize() - 1 << "番目に挿入されました" << std::endl;
 	}
-	else if (index == 0)
+	else
 	{
-		list.PushFront(data);
-		std::cout << "要素" << data << "が最前列に追加されました" << std::endl;
-	}
-	else if (index < list.GetSize())
-	{
-		list.Insert(data, index);
 		std::cout << "要素" << data << "が" << index << "番目に挿入されました" << std::endl;
 	}
 
@@ -185,16 +228,52 @@ void ListOperator::ElementsEdit()
 
 	int index = 0;
 	std::cin >> index;
+	if (std::cin.fail())
+	{
+		std::cout << "入力エラー\n" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(1024, '\n');
+	}
 
 	if (index < list.GetSize())
 	{
 		std::cout << index << "番目の要素の変更する値を入力してください。" << std::endl;
 
-		int data;
+		std::string data;
 		std::cin >> data;
-		list.Change(data, index + 1);
+		list.Change(data, index);
 
 		std::cout << index << "番目の要素の値が" << data << "に変更されました。" << std::endl;
+	}
+	else
+	{
+		std::cout << index << "番目の要素の値が見つかりませんでした。" << std::endl;
+	}
+
+	std::cout << std::endl;
+	manipulatElementsStep = Default;
+}
+
+// 要素の削除
+void ListOperator::ElementsDelete()
+{
+	std::cout << "[要素の削除]" << std::endl;
+	std::cout << "削除したい要素の番号を指定してください。" << std::endl;
+
+	int index = 0;
+	std::cin >> index;
+	if (std::cin.fail())
+	{
+		std::cout << "入力エラー\n" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(1024, '\n');
+	}
+
+	if (index < list.GetSize())
+	{
+		std::string data = list.GetData(index);
+		std::cout << index << "番目の要素" << data << "を削除しました。" << std::endl;
+		list.Erase(index);
 	}
 	else
 	{

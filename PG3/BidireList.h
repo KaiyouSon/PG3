@@ -13,22 +13,6 @@ struct Node
 	Node(T data) : data(data), prev(nullptr), next(nullptr)
 	{
 	}
-
-	void PushFront(Node<T> p)
-	{
-		if (prev == nullptr)
-		{
-			prev = &p;
-		}
-	}
-
-	void PushBack(Node<T> p)
-	{
-		if (next == nullptr)
-		{
-			next = &p;
-		}
-	}
 };
 
 template<typename T>
@@ -53,54 +37,78 @@ private:
 	}
 
 public:
-	BidireList() : begin(nullptr), size(0)
+	BidireList() : begin(new Node<T>), size(0)
 	{
-
 	};
 	BidireList(const T& data) : size(0)
 	{
 		begin.data = data;
 		size++;
 	}
+	~BidireList()
+	{
+		Clear();
+	}
+
+	inline Node<T>* CreateNode(T data)
+	{
+		Node<T>* node = new Node<T>;
+		node->data = data;
+
+		return node;
+
+	}
 
 	// 先頭にノードを追加
-	inline void PushFront(Node<T> p)
+	inline void PushFront(T data)
 	{
 		if (size == 0)
 		{
-			begin = &p;
+			begin->data = data;
 		}
 		else
 		{
-
+			Node<T>* newNode = CreateNode(data);
 			Node<T>* temp = begin;
-			temp->prev = &p;
-			p.next = temp;
-			begin = &p;
+			temp->prev = newNode;
+			newNode->next = temp;
+			begin = newNode;
 		}
 
 		size++;
 	}
 
 	// 末尾にノードを追加
-	inline void PushBack(Node<T> p)
+	inline void PushBack(T data)
 	{
 		if (size == 0)
 		{
-			begin = &p;
+			begin->data = data;
 		}
 		else
 		{
-			p.prev = CheckBack(begin);
-			CheckBack(begin)->next = &p;
+			Node<T>* newNode = CreateNode(data);
+			newNode->prev = CheckBack(begin);
+			CheckBack(begin)->next = newNode;
 		}
 
 		size++;
 	}
 
 	// ノードの挿入
-	inline void Insert(Node<T> p, const int& index)
+	inline void Insert(T data, const int& index)
 	{
+		if (index == 0)
+		{
+			PushFront(data);
+			return;
+		}
+		if (index >= size)
+		{
+			PushBack(data);
+			return;
+		}
+
 		Node<T>* current = begin;			// 現在のノード
 		Node<T>* nextNode = begin->next;	// 次のノード
 		for (int i = 0; i < index - 1; i++)
@@ -109,15 +117,17 @@ public:
 			nextNode = current->next;
 		}
 
-		p.prev = current;
-		p.next = nextNode;
-		current->next = &p;
+		Node<T>* newNode = CreateNode(data);
+		newNode->prev = current;
+		newNode->next = nextNode;
+		current->next = newNode;
+		nextNode->prev = newNode;
 
 		size++;
 	}
 
 	// 要素の変更
-	inline void Change(T p, const int& index)
+	inline void Change(T data, const int& index)
 	{
 		Node<T>* current = begin;			// 現在のノード
 		Node<T>* nextNode = begin->next;	// 次のノード
@@ -127,7 +137,7 @@ public:
 			nextNode = current->next;
 		}
 
-		current->data = p;
+		current->data = data;
 	}
 
 	// 最初のデータ
@@ -174,8 +184,8 @@ public:
 	inline void PopFront()
 	{
 		Node<T>* newBeginNode = begin->next;
+		delete newBeginNode->prev;
 		newBeginNode->prev = nullptr;
-		begin = nullptr;
 		begin = newBeginNode;
 		size--;
 	}
@@ -184,14 +194,25 @@ public:
 	inline void PopBack()
 	{
 		Node<T>* endNode = CheckBack(begin);
-		endNode->next = nullptr;
+		delete endNode;
+		endNode = nullptr;
 		size--;
-		//PushBack(*endPrevNode);
 	}
 
 	// 要素の削除
 	inline void Erase(const unsigned int& index)
 	{
+		if (index == 0)
+		{
+			PopFront();
+			return;
+		}
+		if (index == size - 1)
+		{
+			PopBack();
+			return;
+		}
+
 		auto current = begin;		// 現在のノード
 		auto nextNode = begin->next;	// 次のノード
 		for (int i = 0; i < index - 2; i++)
@@ -206,7 +227,22 @@ public:
 
 
 	// クリア
-	inline void Clear() { begin = nullptr; }
+	inline void Clear()
+	{
+		while (size > 0)
+		{
+			Node<T>* currentNode = begin;
+			Node<T>* nextNode = begin->next;
+			for (int i = 0; i < size - 1; i++)
+			{
+				currentNode = nextNode;
+				nextNode = currentNode->next;
+			}
+			delete currentNode;
+			currentNode = nullptr;
+			size--;
+		}
+	}
 
 	// サイズの取得
 	inline unsigned int GetSize() { return size; }
