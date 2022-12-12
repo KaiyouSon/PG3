@@ -1,13 +1,13 @@
 #pragma once
 #include "Singleton.h"
-#include "Enemy.h"
+#include "IShape.h"
 #include <memory>
 #include <list>
 
 class SceneManager final
 {
 private:
-	std::list<std::unique_ptr<Enemy>> enemys;
+	std::list<std::unique_ptr<IShape>> shapes;
 
 public:
 	void Load();

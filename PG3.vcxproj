@@ -139,12 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="IShape.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Singleton.h" />
   </ItemGroup>

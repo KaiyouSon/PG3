@@ -1,52 +1,37 @@
 #include "SceneManager.h"
+#include "Circle.h"
+#include "Rectangle.h"
 #include <iostream>
-#include <Windows.h>
-#include <string>
 
 SceneManager::SceneManager()
 {
-	const int enemyMaxNum = 2;
-
-	for (int i = 0; i < enemyMaxNum; i++)
-	{
-		enemys.emplace_back(std::move(std::make_unique<Enemy>()));
-	}
+	shapes.emplace_back(std::move(std::make_unique<Circle>(5.f)));
+	shapes.emplace_back(std::move(std::make_unique<Rectangle>(10.f, 20.f)));
 }
 
 void SceneManager::Load()
 {
-	for (const auto& enemy : enemys)
-	{
-		enemy->Load();
-	}
 }
 
 void SceneManager::Init()
 {
-	for (const auto& enemy : enemys)
-	{
-		enemy->Init();
-	}
 }
 
 void SceneManager::Update()
 {
-
-	int count = 0;
-	for (const auto& enemy : enemys)
+	for (const auto& shape : shapes)
 	{
-		std::cout << "enemy" << count;
-		enemy->Update();
-		count++;
+		std::cout << "�ʐρF" << shape->GetSize() << std::endl;
 	}
 }
 
 void SceneManager::Draw()
 {
-	for (const auto& enemy : enemys)
+	for (const auto& shape : shapes)
 	{
-		enemy->Draw();
+		shape->Draw();
 	}
+	std::cout << std::endl;
 }
 
 void SceneManager::ChangeScene(const int sceneNo)
