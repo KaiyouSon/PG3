@@ -5,23 +5,26 @@
 
 int main()
 {
-	int number = 0;
-	const int maxNumber = 3;
+	SceneManager* sceneManager = SceneManager::GetInstance();
+
+	sceneManager->Load();
+	sceneManager->Init();
 
 	while (true)
 	{
-		SceneManager::GetInstance()->ChangeScene(number);
+		sceneManager->Update();
+		sceneManager->Draw();
+		//Sleep(1000);
 
-		number++;
-		if (number > maxNumber)
+		if (Enemy::GetisAllAlive() == false)
 		{
-			number = 0;
+			break;
 		}
-
-		Sleep(1000);
 	}
 
 	SceneManager::DestroyInstance();
+
+	system("pause");
 
 	return 0;
 }
