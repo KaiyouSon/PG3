@@ -25,3 +25,14 @@ void SceneManager::ChangeScene(const int sceneNo)
 		break;
 	}
 }
+
+SceneManager* SceneManager::GetInstance()
+{
+	static SceneManager* sceneManager = new SceneManager;
+	return sceneManager;
+}
+
+void SceneManager::DestroyInstance()
+{
+	delete GetInstance();
+}

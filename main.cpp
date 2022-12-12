@@ -20,5 +20,8 @@ int main()
 
 		Sleep(1000);
 	}
+
+	SceneManager::DestroyInstance();
+
 	return 0;
 }
