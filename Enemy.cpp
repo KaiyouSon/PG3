@@ -1,9 +1,8 @@
 #include "Enemy.h"
 #include <iostream>
+#include <Windows.h>
 
-bool Enemy::isAllAlive = true;
-
-Enemy::Enemy()
+Enemy::Enemy() : state(Approach)
 {
 }
 
@@ -17,11 +16,43 @@ void Enemy::Init()
 
 void Enemy::Update()
 {
-	if (isAllAlive == false) return;
+	// ŠÖ”ƒe[ƒuƒ‹
+	void (Enemy:: * FuncTable[])() =
+	{
+		// “o˜^
+		&Enemy::ApproachUpdate,
+		&Enemy::ShotUpdate,
+		&Enemy::SecessionUpdate
+	};
 
-	std::cout << "¶‚«‚Ä‚é" << std::endl;
+	// Às
+	(this->*FuncTable[state])();
 }
 
 void Enemy::Draw()
 {
+}
+
+void Enemy::ApproachUpdate()
+{
+	std::cout << "“G‚ªÚ‹ß" << std::endl;
+	state = Shot;
+
+	Sleep(1000);
+}
+
+void Enemy::ShotUpdate()
+{
+	std::cout << "“G‚ªËŒ‚" << std::endl;
+	state = Secession;
+
+	Sleep(1000);
+}
+
+void Enemy::SecessionUpdate()
+{
+	std::cout << "“G‚ª—£’E" << std::endl;
+	state = Approach;
+
+	Sleep(1000);
 }

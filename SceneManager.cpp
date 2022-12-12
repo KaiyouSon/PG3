@@ -5,7 +5,7 @@
 
 SceneManager::SceneManager()
 {
-	const int enemyMaxNum = 3;
+	const int enemyMaxNum = 2;
 
 	for (int i = 0; i < enemyMaxNum; i++)
 	{
@@ -31,39 +31,14 @@ void SceneManager::Init()
 
 void SceneManager::Update()
 {
-	int key = 0;
 
-	std::cout << "1 ¶‚«‚é 2 ŽE‚·" << std::endl;
-	std::cin >> key;
-
-	if (key == 1)
+	int count = 0;
+	for (const auto& enemy : enemys)
 	{
-		int count = 0;
-		for (const auto& enemy : enemys)
-		{
-			std::cout << "enemy" << count;
-			enemy->Update();
-			count++;
-			Sleep(500);
-		}
+		std::cout << "enemy" << count;
+		enemy->Update();
+		count++;
 	}
-	else if (key == 2)
-	{
-		Enemy::SetisAllAlive(false);
-
-		enemys.remove_if(
-			[](const auto& enemy)
-			{
-				return !Enemy::GetisAllAlive();
-			});
-
-		if (enemys.empty() == true)
-		{
-			std::cout << "‘S•”‚µ‚ñ‚¾" << std::endl;
-		}
-	}
-
-	std::cout << std::endl;
 }
 
 void SceneManager::Draw()

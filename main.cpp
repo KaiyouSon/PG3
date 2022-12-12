@@ -14,12 +14,6 @@ int main()
 	{
 		sceneManager->Update();
 		sceneManager->Draw();
-		//Sleep(1000);
-
-		if (Enemy::GetisAllAlive() == false)
-		{
-			break;
-		}
 	}
 
 	SceneManager::DestroyInstance();

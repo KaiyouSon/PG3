@@ -2,8 +2,19 @@
 class Enemy
 {
 private:
-	static bool isAllAlive;
+	enum EnemyState
+	{
+		Approach,
+		Shot,
+		Secession,
+	};
 
+	int state;
+
+private:
+	void ApproachUpdate();
+	void ShotUpdate();
+	void SecessionUpdate();
 
 public:
 	Enemy();
@@ -11,12 +22,5 @@ public:
 	void Init();
 	void Update();
 	void Draw();
-
-public:
-	// セッター
-	static void SetisAllAlive(const bool& isAllAlive) { Enemy::isAllAlive = isAllAlive; }
-
-	// ゲッター
-	static bool GetisAllAlive() { return isAllAlive; }
 };
 
