@@ -1,25 +1,31 @@
 #include <iostream>
 #include <memory>
-#include <Windows.h>
-#include "SceneManager.h"
+#include <string>
+#include <vector>
+#include "TaskManager.h"
+
+enum class ClassSign
+{
+	LD2B,
+	LE2A,
+};
+
+class Manager
+{
+	int id;
+	std::string name;
+	ClassSign classSign;
+};
+
 
 int main()
 {
-	SceneManager* sceneManager = SceneManager::GetInstance();
+	TaskManager taskManager;
 
-	sceneManager->Load();
-	sceneManager->Init();
+	taskManager.AddTask();
 
-	while (true)
-	{
-		sceneManager->Update();
-		sceneManager->Draw();
-		Sleep(1000);
-	}
+	taskManager.Update();
 
-	SceneManager::DestroyInstance();
-
-	system("pause");
 
 	return 0;
 }
