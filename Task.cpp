@@ -1,6 +1,6 @@
 #include "Task.h"
 #include <iostream>
-unsigned int Task::idIndex = 0;
+unsigned int Task::idIndex = 1;
 
 Task::Task()
 {

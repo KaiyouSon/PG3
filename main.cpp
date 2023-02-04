@@ -1,31 +1,14 @@
-#include <iostream>
-#include <memory>
-#include <string>
+#include "TaskManagementSystem.h"
 #include <vector>
-#include "TaskManager.h"
-
-enum class ClassSign
-{
-	LD2B,
-	LE2A,
-};
-
-class Manager
-{
-	int id;
-	std::string name;
-	ClassSign classSign;
-};
-
 
 int main()
 {
-	TaskManager taskManager;
+	TaskManagementSystem taskManager;
 
-	taskManager.AddTask();
-
-	taskManager.Update();
-
+	while (true)
+	{
+		taskManager.Update();
+	}
 
 	return 0;
 }
