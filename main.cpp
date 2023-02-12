@@ -4,6 +4,7 @@
 int main()
 {
 	TaskManagementSystem taskManager;
+	taskManager.LoadData();
 
 	while (true)
 	{

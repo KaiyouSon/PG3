@@ -11,12 +11,25 @@ Task::Task()
 void Task::InputTitle()
 {
 	int inputNumber = 0;
+	do
+	{
+		std::cout << "題名を選択してください" << std::endl;
+		std::cout << "1.バグ修正" << std::endl;
+		std::cout << "2.仕様追加" << std::endl;
 
-	std::cout << "題名を選択してください" << std::endl;
-	std::cout << "1.バグ修正" << std::endl;
-	std::cout << "2.仕様追加" << std::endl;
+		std::cin >> inputNumber;
 
-	std::cin >> inputNumber;
+		if (inputNumber > 2)
+		{
+			std::cout << std::endl;
+		}
+		else
+		{
+			break;
+		}
+
+	} while (true);
+
 	switch (inputNumber)
 	{
 	case 1:
@@ -38,18 +51,35 @@ void Task::InputContent()
 void Task::InputDeadline()
 {
 	std::cout << "期限を入力してください" << std::endl;
-	std::cin >> content;
+	std::cin >> deadline;
+}
+void Task::InputManager(const Manager& manager)
+{
+	this->manager = manager;
 }
 void Task::InputPriorityType()
 {
 	int inputNumber = 0;
+	do
+	{
+		std::cout << "優先度を選択してください" << std::endl;
+		std::cout << "1.高" << std::endl;
+		std::cout << "2.中" << std::endl;
+		std::cout << "3.低" << std::endl;
 
-	std::cout << "優先度を選択してください" << std::endl;
-	std::cout << "1.高" << std::endl;
-	std::cout << "2.中" << std::endl;
-	std::cout << "3.低" << std::endl;
+		std::cin >> inputNumber;
 
-	std::cin >> inputNumber;
+		if (inputNumber > 3)
+		{
+			std::cout << std::endl;
+		}
+		else
+		{
+			break;
+		}
+
+	} while (true);
+
 	switch (inputNumber)
 	{
 	case 1:
@@ -69,9 +99,27 @@ void Task::InputPriorityType()
 void Task::InputProgressType()
 {
 	int inputNumber = 0;
+	do
+	{
+		std::cout << "進捗を選択してください" << std::endl;
 
-	std::cout << "進捗を選択してください" << std::endl;
-	std::cin >> inputNumber;
+		std::cout << "1.未着手" << std::endl;
+		std::cout << "2.修正中" << std::endl;
+		std::cout << "3.修正済" << std::endl;
+
+		std::cin >> inputNumber;
+
+		if (inputNumber > 3)
+		{
+			std::cout << std::endl;
+		}
+		else
+		{
+			break;
+		}
+
+	} while (true);
+
 	switch (inputNumber)
 	{
 	case 1:
@@ -103,7 +151,7 @@ void Task::OutputTitle()
 		std::cout << "バグ修正" << std::endl;
 		break;
 	case TaskTitle::Request:
-		std::cout << "仕様変更" << std::endl;
+		std::cout << "仕様追加" << std::endl;
 		break;
 	default:
 		std::cout << "未選択" << std::endl;
@@ -119,6 +167,10 @@ void Task::OutputDeadline()
 {
 	std::cout << "[期限]" << std::endl;
 	std::cout << deadline << std::endl;
+}
+void Task::OutputManager()
+{
+	manager.OutputName();
 }
 void Task::OutputPriorityType()
 {

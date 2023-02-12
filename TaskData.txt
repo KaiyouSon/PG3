@@ -1,0 +1,30 @@
+TasksSize 4
+
+TaskTitle 0
+TaskContent bullet
+TaskDeadline er
+TaskManagerID 1
+TaskPriorityType 0
+TaskProgressType 0
+
+TaskTitle 0
+TaskContent boss
+TaskDeadline er
+TaskManagerID 1
+TaskPriorityType 0
+TaskProgressType 0
+
+TaskTitle 1
+TaskContent player
+TaskDeadline er
+TaskManagerID 1
+TaskPriorityType 0
+TaskProgressType 0
+
+TaskTitle 1
+TaskContent effect
+TaskDeadline er
+TaskManagerID 1
+TaskPriorityType 0
+TaskProgressType 0
+

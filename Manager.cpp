@@ -1,11 +1,8 @@
 #include "Manager.h"
 #include <iostream>
 
-unsigned int Manager::idIndex = 1;
-
-Manager::Manager() :id(idIndex)
+Manager::Manager()
 {
-	idIndex++;
 }
 
 void Manager::InputName()
@@ -20,6 +17,7 @@ void Manager::InputClassSign()
 	std::cout << "クラス記号を選択してください" << std::endl;
 	std::cout << "1.LD2B" << std::endl;
 	std::cout << "2.LE2A" << std::endl;
+	std::cout << "3.LE2B" << std::endl;
 
 	std::cin >> inputNumber;
 	switch (inputNumber)
@@ -29,6 +27,9 @@ void Manager::InputClassSign()
 		break;
 	case 2:
 		classSign = ClassSign::LE2A;
+		break;
+	case 3:
+		classSign = ClassSign::LE2B;
 		break;
 	default:
 		classSign = ClassSign::Unknown;
@@ -57,16 +58,11 @@ void Manager::OutputClassSign()
 	case ClassSign::LE2A:
 		std::cout << "LE2A" << std::endl;
 		break;
+	case ClassSign::LE2B:
+		std::cout << "LE2B" << std::endl;
+
 	default:
 		std::cout << "未選択" << std::endl;
 		break;
 	}
-}
-
-void Manager::OutputInfo()
-{
-
-
-
-
 }

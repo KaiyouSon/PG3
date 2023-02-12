@@ -1,0 +1,11 @@
+ManagersSize 3
+
+ManagerName a
+ManagerClassSign 1
+
+ManagerName b
+ManagerClassSign 1
+
+ManagerName d
+ManagerClassSign 2
+
